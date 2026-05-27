@@ -151,6 +151,96 @@
     footer{border-top:1px solid var(--gray-200);background:#faf8ff;padding:16px 18px;color:#4b5563}
     .muted{color:var(--muted)}
     .hr{height:1px;background:var(--gray-200);margin:12px 0}
+
+    /* MODALES EMAIL */
+    .modal-overlay{
+      display:none;position:fixed;inset:0;z-index:200;
+      background:rgba(15,10,30,.55);backdrop-filter:blur(4px);
+      align-items:center;justify-content:center;padding:16px;
+    }
+    .modal-overlay.open{display:flex}
+    .modal{
+      background:#fff;border-radius:22px;padding:32px 28px 28px;
+      max-width:460px;width:100%;box-shadow:0 30px 60px rgba(0,0,0,.22);
+      position:relative;animation:modalIn .22s ease;
+    }
+    @keyframes modalIn{from{opacity:0;transform:translateY(18px) scale(.97)}to{opacity:1;transform:none}}
+    .modal-close{
+      position:absolute;top:14px;right:16px;background:none;border:none;cursor:pointer;
+      color:var(--muted);font-size:22px;line-height:1;padding:4px 8px;border-radius:8px;
+    }
+    .modal-close:hover{background:var(--gray-100)}
+    .modal-icon{font-size:36px;margin-bottom:10px}
+    .modal h2{margin:0 0 6px;font-size:20px;color:var(--violet-dark);font-weight:900}
+    .modal p{margin:0 0 18px;color:var(--muted);font-size:14px;line-height:1.6}
+    .modal label{display:block;font-size:13px;font-weight:800;color:var(--text);margin-bottom:6px}
+    .modal input[type=email]{
+      width:100%;padding:12px 14px;border:1.5px solid var(--gray-200);border-radius:12px;
+      font-size:15px;outline:none;transition:.15s border-color;font-family:inherit;
+    }
+    .modal input[type=email]:focus{border-color:var(--violet)}
+    .modal-actions{display:flex;gap:10px;margin-top:18px}
+    .btn-cancel{
+      flex:1;padding:12px;border-radius:999px;border:2px solid var(--gray-200);
+      background:#fff;color:var(--muted);font-weight:800;cursor:pointer;font-size:14px;
+      transition:.15s background;
+    }
+    .btn-cancel:hover{background:var(--gray-50)}
+    .btn-send{
+      flex:2;padding:12px;border-radius:999px;border:none;
+      background:var(--violet);color:#fff;font-weight:900;cursor:pointer;font-size:14px;
+      transition:.15s transform,.2s box-shadow;
+    }
+    .btn-send:hover{transform:translateY(-1px);box-shadow:0 8px 18px rgba(95,45,135,.25)}
+    .btn-send:disabled{opacity:.6;cursor:not-allowed;transform:none;box-shadow:none}
+    .modal-feedback{
+      margin-top:14px;padding:12px 14px;border-radius:12px;font-size:13px;font-weight:700;display:none;
+    }
+    .modal-feedback.success{background:#d1fae5;color:#065f46;border:1px solid #6ee7b7;display:block}
+    .modal-feedback.error{background:#fee2e2;color:#991b1b;border:1px solid #fca5a5;display:block}
+
+    /* PAGE 4 — Mes Réseaux */
+    .reseaux-hero{
+      background:linear-gradient(180deg,#f9f7ff,#ffffff 60%);
+      padding:32px 16px 28px;
+      border-bottom:1px solid var(--gray-200);
+      text-align:center;
+    }
+    .reseaux-hero .section-title{margin:0 0 8px}
+    .reseaux-hero .intro{max-width:560px;margin:0 auto 6px}
+    .reseaux-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+      gap:16px;
+      margin:24px 0;
+    }
+    .reseau-card{
+      background:#fff;border:1px solid var(--gray-200);border-radius:18px;
+      padding:20px 20px 18px;display:flex;flex-direction:column;align-items:flex-start;gap:10px;
+      box-shadow:0 8px 20px rgba(0,0,0,.06);transition:.18s transform ease,.2s box-shadow ease;
+      text-decoration:none;color:inherit;
+    }
+    .reseau-card:hover{transform:translateY(-3px);box-shadow:0 16px 32px rgba(95,45,135,.13)}
+    .reseau-icon{width:48px;height:48px;border-radius:14px;display:grid;place-items:center;font-size:24px;flex-shrink:0;}
+    .reseau-card .reseau-header{display:flex;align-items:center;gap:12px;width:100%}
+    .reseau-card .reseau-label{font-weight:900;font-size:16px;color:var(--violet-dark)}
+    .reseau-card .reseau-desc{font-size:13px;color:var(--muted);line-height:1.5;margin:0}
+    .reseau-card .reseau-handle{
+      display:inline-block;margin-top:4px;font-size:12px;font-weight:800;
+      color:var(--violet);background:#5f2d870e;border:1px solid #5f2d8722;
+      border-radius:999px;padding:4px 10px;
+    }
+    .reseau-card .reseau-arrow{margin-top:auto;align-self:flex-end;color:var(--violet-light);font-size:18px;opacity:.7;}
+    .ic-insta{background:linear-gradient(135deg,#f9ce34,#ee2a7b,#6228d7)}
+    .ic-tiktok{background:#000}
+    .ic-youtube{background:#ff0000}
+    .ic-facebook{background:#1877f2}
+    .ic-linkedin{background:#0a66c2}
+    .reseau-divider{
+      display:flex;align-items:center;gap:10px;margin:10px 0 4px;
+      color:var(--muted);font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;
+    }
+    .reseau-divider:before,.reseau-divider:after{content:"";flex:1;height:1px;background:var(--gray-200)}
   </style>
 </head>
 <body>
@@ -165,6 +255,7 @@
         <a class="tab-link active" href="#soutenir" onclick="switchTab('soutenir')">Soutenir</a>
         <a class="tab-link" href="#projet" onclick="switchTab('projet')">Le Projet</a>
         <a class="tab-link" href="#parcours" onclick="switchTab('parcours')">Mon Parcours</a>
+        <a class="tab-link" href="#reseaux" onclick="switchTab('reseaux')">Mes Réseaux</a>
       </nav>
     </div>
   </header>
@@ -190,14 +281,14 @@
             <div class="cta-grid">
               <div class="cta-card">
                 <h3>💜 Soutenir le projet</h3>
-                <p>Recevez un mail de remerciement avec les coordonnées pour effectuer votre don.</p>
-                <a class="btn" href="mailto:goyeaudsadventure@gmail.com?subject=Don%20-%20Triple%20Couronne">Soutenir le projet</a>
+                <p>Recevez un mail de remerciement avec les coordonnées bancaires pour effectuer votre don directement à l’association.</p>
+                <button class="btn" onclick="openModal('simple')" style="width:100%;cursor:pointer">Soutenir le projet</button>
               </div>
 
               <div class="cta-card">
                 <h3>💜 Soutenir le projet (avec justificatif)</h3>
                 <p>Pour les dons supérieurs à 50€, un reçu fiscal nominatif vous sera transmis.</p>
-                <a class="btn" href="mailto:goyeaudsadventure@gmail.com?subject=Don%20-%20Triple%20Couronne%20(avec%20justificatif)">Soutenir le projet (avec justificatif)</a>
+                <button class="btn" onclick="openModal('justificatif')" style="width:100%;cursor:pointer">Soutenir le projet (avec justificatif)</button>
               </div>
             </div>
           </div>
@@ -347,7 +438,108 @@
         </div>
       </div>
     </section>
+
+    <!-- ONGLET 4: MES RÉSEAUX -->
+    <section id="reseaux" class="section">
+      <div class="reseaux-hero">
+        <h2 class="section-title">Mes Réseaux</h2>
+        <p class="intro">Suivez l’aventure Triple Couronne en direct sur toutes les plateformes 👇</p>
+      </div>
+      <div class="page">
+        <div class="reseau-divider">Instagram</div>
+        <div class="reseaux-grid">
+          <a class="reseau-card" href="https://www.instagram.com/theo_goyeaud?igsh=MWI1NDU3Mmt0NnQyYw%3D%3D&utm_source=qr" target="_blank" rel="noopener">
+            <div class="reseau-header">
+              <div class="reseau-icon ic-insta">📸</div>
+              <div><div class="reseau-label">Instagram Personnel</div><span class="reseau-handle">@theo_goyeaud</span></div>
+            </div>
+            <p class="reseau-desc">Toute la préparation au quotidien : entraînements, coulisses et moments du projet Triple Couronne.</p>
+            <span class="reseau-arrow">→</span>
+          </a>
+          <a class="reseau-card" href="https://www.instagram.com/road_to_the_triple_crown?igsh=MTdid2Z3NGp5cnNhcA%3D%3D&utm_source=qr" target="_blank" rel="noopener">
+            <div class="reseau-header">
+              <div class="reseau-icon ic-insta">🏊</div>
+              <div><div class="reseau-label">Instagram du Projet</div><span class="reseau-handle">@road_to_the_triple_crown</span></div>
+            </div>
+            <p class="reseau-desc">La page dédiée à l’aventure : actualités, étapes franchies, Manche, Catalina et Manhattan.</p>
+            <span class="reseau-arrow">→</span>
+          </a>
+        </div>
+        <div class="reseau-divider">Vidéo</div>
+        <div class="reseaux-grid">
+          <a class="reseau-card" href="https://www.tiktok.com/@theo_goyeaud?_r=1&_t=ZN-96htPxW0VgE" target="_blank" rel="noopener">
+            <div class="reseau-header">
+              <div class="reseau-icon ic-tiktok">🎵</div>
+              <div><div class="reseau-label">TikTok</div><span class="reseau-handle">@theo_goyeaud</span></div>
+            </div>
+            <p class="reseau-desc">Formats courts et immersifs pour suivre les séances, les défis et les moments forts de la préparation.</p>
+            <span class="reseau-arrow">→</span>
+          </a>
+          <a class="reseau-card" href="https://youtube.com/@theogoyeaud9670?si=B_TU9B0i-67OePOM" target="_blank" rel="noopener">
+            <div class="reseau-header">
+              <div class="reseau-icon ic-youtube">▶️</div>
+              <div><div class="reseau-label">YouTube</div><span class="reseau-handle">@theogoyeaud9670</span></div>
+            </div>
+            <p class="reseau-desc">Vlogs, documentaires et récits complets des traversées pour vivre l’aventure de l’intérieur.</p>
+            <span class="reseau-arrow">→</span>
+          </a>
+        </div>
+        <div class="reseau-divider">Communauté</div>
+        <div class="reseaux-grid">
+          <a class="reseau-card" href="https://www.facebook.com/share/1DzmzW4bZ8/?mibextid=wwXIfr" target="_blank" rel="noopener">
+            <div class="reseau-header">
+              <div class="reseau-icon ic-facebook">👥</div>
+              <div><div class="reseau-label">Facebook</div><span class="reseau-handle">Théo Goyeaud</span></div>
+            </div>
+            <p class="reseau-desc">Actualités et partages pour rester connecté avec la communauté autour du projet.</p>
+            <span class="reseau-arrow">→</span>
+          </a>
+          <a class="reseau-card" href="https://www.linkedin.com/in/théo-goyeaud-b78738230?utm_source=share_via&utm_content=profile&utm_medium=member_ios" target="_blank" rel="noopener">
+            <div class="reseau-header">
+              <div class="reseau-icon ic-linkedin">💼</div>
+              <div><div class="reseau-label">LinkedIn</div><span class="reseau-handle">Théo Goyeaud</span></div>
+            </div>
+            <p class="reseau-desc">Parcours professionnel, partenariats et actualités du projet pour les entreprises et sponsors.</p>
+            <span class="reseau-arrow">→</span>
+          </a>
+        </div>
+      </div>
+    </section>
   </main>
+
+  <!-- MODALE 1 : Don simple -->
+  <div class="modal-overlay" id="modal-simple" onclick="handleOverlayClick(event,'modal-simple')">
+    <div class="modal" role="dialog" aria-modal="true">
+      <button class="modal-close" onclick="closeModal('modal-simple')" aria-label="Fermer">✕</button>
+      <div class="modal-icon">💜</div>
+      <h2>Soutenir le projet</h2>
+      <p>Renseignez votre adresse e-mail ci-dessous. Vous recevrez immédiatement un message de remerciement avec les coordonnées bancaires de l’association <strong>GOYEAUD’S ADVENTURE</strong> pour effectuer votre virement.</p>
+      <label for="email-simple">Votre adresse e-mail</label>
+      <input type="email" id="email-simple" placeholder="prenom.nom@exemple.com" autocomplete="email" />
+      <div class="modal-actions">
+        <button class="btn-cancel" onclick="closeModal('modal-simple')">Annuler</button>
+        <button class="btn-send" id="btn-send-simple" onclick="sendEmail('simple')">Envoyer 💜</button>
+      </div>
+      <div class="modal-feedback" id="feedback-simple"></div>
+    </div>
+  </div>
+
+  <!-- MODALE 2 : Don avec justificatif -->
+  <div class="modal-overlay" id="modal-justificatif" onclick="handleOverlayClick(event,'modal-justificatif')">
+    <div class="modal" role="dialog" aria-modal="true">
+      <button class="modal-close" onclick="closeModal('modal-justificatif')" aria-label="Fermer">✕</button>
+      <div class="modal-icon">📄</div>
+      <h2>Soutenir le projet (avec justificatif)</h2>
+      <p>Renseignez votre adresse e-mail ci-dessous. Vous recevrez les coordonnées bancaires ainsi que les informations nécessaires pour obtenir votre <strong>reçu fiscal nominatif</strong>.</p>
+      <label for="email-justificatif">Votre adresse e-mail</label>
+      <input type="email" id="email-justificatif" placeholder="prenom.nom@exemple.com" autocomplete="email" />
+      <div class="modal-actions">
+        <button class="btn-cancel" onclick="closeModal('modal-justificatif')">Annuler</button>
+        <button class="btn-send" id="btn-send-justificatif" onclick="sendEmail('justificatif')">Envoyer 📄</button>
+      </div>
+      <div class="modal-feedback" id="feedback-justificatif"></div>
+    </div>
+  </div>
 
   <footer>
     <div style="max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap">
@@ -359,24 +551,81 @@
     </div>
   </footer>
 
+
+  <!-- EmailJS SDK -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
   <script>
-    // Gestion d’onglets simple
-    function switchTab(id){
-      document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
-      const target = document.getElementById(id);
-      if(target){ target.classList.add('active'); }
-      document.querySelectorAll('.tab-link').forEach(a=>a.classList.remove('active'));
-      const link = document.querySelector('.tab-link[href="#'+id+'"]');
-      if(link){ link.classList.add('active'); }
-      window.scrollTo({top:0, behavior:'instant'});
+    emailjs.init('Efrq9iSgwvKS2JMnU');
+    var EJS_SERVICE='service_zwr4lxd';
+    var EJS_TPL_1='template_j28wu1c';
+    var EJS_TPL_2='template_37wrv0q';
+
+    function openModal(type){
+      document.getElementById('modal-'+type).classList.add('open');
+      document.body.style.overflow='hidden';
+      setTimeout(function(){document.getElementById('email-'+type).focus();},80);
+      var fb=document.getElementById('feedback-'+type);
+      fb.className='modal-feedback'; fb.textContent='';
+      document.getElementById('email-'+type).value='';
+      var btn=document.getElementById('btn-send-'+type);
+      btn.disabled=false;
+      btn.textContent=type==='simple'?'Envoyer 💜':'Envoyer 📄';
     }
-    document.querySelectorAll('.tab-link').forEach(a=>{
-      a.addEventListener('click', e=>{ e.preventDefault(); });
+    function closeModal(id){
+      document.getElementById(id).classList.remove('open');
+      document.body.style.overflow='';
+    }
+    function handleOverlayClick(e,id){
+      if(e.target===document.getElementById(id)) closeModal(id);
+    }
+    document.addEventListener('keydown',function(e){
+      if(e.key==='Escape'){closeModal('modal-simple');closeModal('modal-justificatif');}
     });
-    window.addEventListener('DOMContentLoaded', ()=>{
-      const hash = (location.hash||'').replace('#','');
-      if(hash && document.getElementById(hash)) switchTab(hash);
+    function sendEmail(type){
+      var emailInput=document.getElementById('email-'+type);
+      var btn=document.getElementById('btn-send-'+type);
+      var fb=document.getElementById('feedback-'+type);
+      var email=emailInput.value.trim();
+      if(!email||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
+        fb.className='modal-feedback error';
+        fb.textContent='⚠️ Merci de renseigner une adresse e-mail valide.';
+        emailInput.focus(); return;
+      }
+      btn.disabled=true; btn.textContent='⏳ Envoi en cours…';
+      fb.className='modal-feedback'; fb.textContent='';
+      var tpl=type==='simple'?EJS_TPL_1:EJS_TPL_2;
+      emailjs.send(EJS_SERVICE,tpl,{to_email:email})
+        .then(function(){
+          btn.textContent='✅ Envoyé !';
+          fb.className='modal-feedback success';
+          fb.textContent='🎉 E-mail envoyé avec succès ! Vérifiez votre boîte de réception (et vos spams si besoin).';
+          setTimeout(function(){closeModal('modal-'+type);},3500);
+        })
+        .catch(function(err){
+          console.error('EmailJS error:',err);
+          btn.disabled=false;
+          btn.textContent=type==='simple'?'Envoyer 💜':'Envoyer 📄';
+          fb.className='modal-feedback error';
+          fb.textContent='❌ Une erreur est survenue. Réessayez ou contactez goyeaudsadventure@gmail.com.';
+        });
+    }
+    function switchTab(id){
+      document.querySelectorAll('.section').forEach(function(s){s.classList.remove('active');});
+      var target=document.getElementById(id);
+      if(target){target.classList.add('active');}
+      document.querySelectorAll('.tab-link').forEach(function(a){a.classList.remove('active');});
+      var link=document.querySelector('.tab-link[href="#'+id+'"]');
+      if(link){link.classList.add('active');}
+      window.scrollTo({top:0,behavior:'instant'});
+    }
+    document.querySelectorAll('.tab-link').forEach(function(a){
+      a.addEventListener('click',function(e){e.preventDefault();});
+    });
+    window.addEventListener('DOMContentLoaded',function(){
+      var hash=(location.hash||'').replace('#','');
+      if(hash&&document.getElementById(hash)) switchTab(hash);
     });
   </script>
+
 </body>
 </html>
