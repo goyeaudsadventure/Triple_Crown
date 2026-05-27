@@ -1,0 +1,382 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Triple Couronne - Goyeaud’s Adventure</title>
+  <meta name="description" content="Triple Crown of Open Water Swimming par Théo Goyeaud. Manche 2025 réalisée, cap sur Catalina et 20 Bridges. Soutenir, projet, parcours." />
+  <style>
+    :root{
+      /* Palette */
+      --violet:#5f2d87;      /* dominante */
+      --violet-dark:#4a2268;
+      --violet-light:#7a4a9e;
+      --green:#13907b;       /* secondaire */
+      --yellow:#fad239;      /* secondaire */
+      --white:#ffffff;
+      --bg:#ffffff;
+      --gray-25:#fcfcfd;
+      --gray-50:#f6f7fb;
+      --gray-100:#eef1f6;
+      --gray-200:#e5e7eb;
+      --gray-400:#9ca3af;
+      --text:#1f2937;
+      --muted:#6b7280;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;background:var(--bg);color:var(--text);line-height:1.6;
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Inter,Arial,"Noto Sans";
+    }
+
+    /* Barre du haut (plus légère) */
+    header{
+      position:fixed;top:0;left:0;right:0;z-index:50;
+      background:linear-gradient(180deg, var(--violet) 0%, var(--violet-dark) 100%);
+      color:var(--white);
+      box-shadow:0 6px 20px rgba(0,0,0,.18);
+    }
+    .topbar{
+      max-width:1200px;margin:0 auto;padding:8px 16px;
+      display:flex;align-items:center;justify-content:space-between;gap:12px;
+    }
+    .brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--white);font-weight:900}
+    .logo-img{width:44px;height:44px;display:block}
+    .tabs{display:flex;gap:10px;flex-wrap:wrap}
+    .tab-link{
+      color:#f4edff;text-decoration:none;font-weight:800;padding:8px 12px;border-radius:10px;border:1px solid transparent;
+    }
+    .tab-link.active,.tab-link:hover{background:#ffffff1a;border-color:#ffffff33;color:#fff}
+
+    main{padding-top:70px}
+
+    /* Sections (onglets) */
+    .section{display:none;min-height:100vh}
+    .section.active{display:block}
+
+    /* PAGE 1 — Soutenir (fond clair) */
+    .hero{
+      background:
+        radial-gradient(900px 400px at 90% -10%, #5f2d870e, transparent 60%),
+        linear-gradient(180deg,#ffffff, #f9f7ff 40%, #ffffff 100%);
+      color:var(--text);
+      padding:32px 16px 42px;
+      border-bottom:1px solid var(--gray-200);
+    }
+    .hero .wrap{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1.1fr .9fr;gap:22px;align-items:center}
+    @media(max-width:960px){.hero .wrap{grid-template-columns:1fr}}
+    .eyebrow{
+      display:inline-flex;gap:8px;align-items:center;background:#5f2d870e;border:1px solid #5f2d8726;
+      color:#4a2268;border-radius:999px;padding:6px 10px;font-weight:800;font-size:12px
+    }
+    .dot{width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 0 2px #d1fae5}
+    .title{font-size:clamp(28px,4vw,42px);line-height:1.15;margin:10px 0 8px;font-weight:900;color:var(--violet-dark)}
+    .lead{color:#4b5563;font-size:clamp(16px,1.9vw,18px)}
+    .kpis{display:flex;gap:12px;flex-wrap:wrap;margin:16px 0}
+    .kpi{
+      background:#fff;border:1px solid var(--gray-200);border-radius:14px;padding:12px 14px;min-width:180px;
+      box-shadow:0 6px 16px rgba(0,0,0,.06)
+    }
+    .kpi b{display:block;font-size:17px;color:var(--violet)}
+    .kpi span{font-size:13px;color:#475569}
+
+    .cta-grid{margin-top:18px;display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    @media(max-width:640px){.cta-grid{grid-template-columns:1fr}}
+    .cta-card{
+      background:#fff;border-radius:16px;border:1px solid var(--gray-200);padding:16px;
+      box-shadow:0 12px 28px rgba(0,0,0,.08)
+    }
+    .cta-card h3{margin:0 0 6px;font-size:20px;color:var(--violet)}
+    .cta-card p{margin:0 0 12px;color:var(--muted)}
+    .btn{
+      display:inline-block;text-decoration:none;font-weight:900;border-radius:999px;padding:12px 18px;
+      border:2px solid var(--violet);background:var(--violet);color:#fff;text-align:center;
+      transition:.15s transform ease,.2s box-shadow ease
+    }
+    .btn:hover{transform:translateY(-2px);box-shadow:0 10px 22px rgba(95,45,135,.22)}
+
+    /* Visuel logo + bande verte/jaune */
+    .logo-card{
+      width:280px;height:280px;border-radius:26px;background:linear-gradient(135deg,#ffffff,#f4f0ff);
+      border:1px solid #e6def7;display:grid;place-items:center;box-shadow:0 16px 36px rgba(0,0,0,.1);position:relative;overflow:hidden;margin:0 auto
+    }
+    .ribbon{position:absolute;bottom:-18px;left:-18px;width:140%;height:14px;background:linear-gradient(90deg,var(--green),var(--yellow));transform:rotate(-6deg)}
+    .note{margin-top:10px;font-size:12px;color:#6b7280;text-align:center}
+
+    .page{max-width:1100px;margin:0 auto;padding:16px}
+
+    /* PAGE 2 — Le Projet (déroulé vertical clair) */
+    .section-title{font-size:clamp(22px,3vw,32px);margin:10px 0 8px;color:var(--violet);font-weight:900}
+    .intro{color:#374151;margin:6px 0 14px}
+    .chips{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 16px}
+    .chip{background:#13907b12;color:#0b6255;border:1px solid #13907b33;border-radius:999px;padding:6px 10px;font-size:12px;font-weight:800}
+
+    .block{background:#fff;border:1px solid var(--gray-200);border-radius:14px;padding:16px;margin:12px 0;box-shadow:0 8px 18px rgba(0,0,0,.05)}
+    .block h3{margin:0 0 8px;color:var(--violet-dark);font-size:18px}
+    .facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:8px;margin:8px 0}
+    .fact{display:flex;align-items:center;gap:8px;background:#5f2d870a;border:1px dashed #5f2d8733;color:#4a2268;border-radius:10px;padding:6px 10px;font-weight:700;font-size:13px}
+    .dot-y{width:10px;height:10px;border-radius:50%;background:var(--yellow);box-shadow:0 0 0 2px #fff,0 0 0 3px #fde68a}
+    .dot-g{width:10px;height:10px;border-radius:50%;background:var(--green);box-shadow:0 0 0 2px #fff,0 0 0 3px #bbf7d0}
+    .warn{background:#fff8e1;border:1px solid #fde68a;color:#92400e;border-radius:10px;padding:10px 12px;margin-top:8px}
+
+    .two-col{display:grid;grid-template-columns:1fr;gap:12px}
+    @media(min-width:900px){.two-col{grid-template-columns:1.3fr .7fr}}
+
+    /* PAGE 3 — Frise (accents verts/jaunes) */
+    .timeline{position:relative;max-width:920px;margin:12px auto 0;padding:12px 0}
+    .timeline:before{
+      content:"";position:absolute;left:50%;top:0;bottom:0;width:6px;background:linear-gradient(var(--green),var(--yellow));
+      transform:translateX(-50%);border-radius:4px
+    }
+    .t-item{position:relative;width:50%;padding:18px 20px}
+    .t-item:nth-child(odd){left:0;text-align:right;padding-right:36px}
+    .t-item:nth-child(even){left:50%;text-align:left;padding-left:36px}
+    .t-item:before{
+      content:"";position:absolute;top:22px;width:16px;height:16px;border-radius:50%;
+      background:var(--violet);box-shadow:0 0 0 4px #ffffff, 0 0 0 6px #e9d7ff66
+    }
+    .t-item:nth-child(odd):before{right:-8px}
+    .t-item:nth-child(even):before{left:-8px}
+    .t-card{
+      display:inline-block;max-width:95%;
+      background:#fff;border:1px solid var(--gray-200);border-left:6px solid var(--green);
+      border-radius:12px;padding:12px 14px;text-align:left;box-shadow:0 8px 18px rgba(0,0,0,.06)
+    }
+    .t-title{margin:0 0 6px;color:var(--violet);font-size:16px;font-weight:900}
+    .t-body{margin:0;color:#374151;font-size:14px}
+    .tag{display:inline-block;margin-top:6px;background:#fad23922;color:#7a5a00;border:1px solid #fad23966;border-radius:999px;padding:4px 10px;font-size:12px;font-weight:800}
+
+    footer{border-top:1px solid var(--gray-200);background:#faf8ff;padding:16px 18px;color:#4b5563}
+    .muted{color:var(--muted)}
+    .hr{height:1px;background:var(--gray-200);margin:12px 0}
+  </style>
+</head>
+<body>
+  <!-- NAV -->
+  <header>
+    <div class="topbar">
+      <a class="brand" href="#" onclick="switchTab('soutenir')">
+        <img class="logo-img" src="logo-triple-couronne.png" alt="Logo Triple Couronne">
+        <span>Triple Couronne</span>
+      </a>
+      <nav class="tabs">
+        <a class="tab-link active" href="#soutenir" onclick="switchTab('soutenir')">Soutenir</a>
+        <a class="tab-link" href="#projet" onclick="switchTab('projet')">Le Projet</a>
+        <a class="tab-link" href="#parcours" onclick="switchTab('parcours')">Mon Parcours</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- ONGLET 1: SOUTENIR — moins violet, mêmes textes, deuxième avec (avec justificatif) -->
+    <section id="soutenir" class="section active">
+      <div class="hero">
+        <div class="wrap">
+          <div>
+            <span class="eyebrow"><span class="dot"></span> Triple Crown • Objectif réaliser la meilleur performance française </span>
+            <h1 class="title">Soutenez l’aventure Triple Couronne</h1>
+            <p class="lead">
+              La Manche est réalisée (2025). Cap sur Catalina et Manhattan dans une dynamique de vitesse et d’excellence.
+            </p>
+
+            <div class="kpis">
+              <div class="kpi"><b>Manche</b><span>2025 - 44km - 10h11 - ~18°C</span></div>
+              <div class="kpi"><b>Catalina</b><span>32–40km - objectif 8h - 15–20°C</span></div>
+              <div class="kpi"><b>Manhattan</b><span>~46km - ~9h - 20–22°C</span></div>
+            </div>
+
+            <div class="cta-grid">
+              <div class="cta-card">
+                <h3>💜 Soutenir le projet</h3>
+                <p>Recevez un mail de remerciement avec les coordonnées pour effectuer votre don.</p>
+                <a class="btn" href="mailto:goyeaudsadventure@gmail.com?subject=Don%20-%20Triple%20Couronne">Soutenir le projet</a>
+              </div>
+
+              <div class="cta-card">
+                <h3>💜 Soutenir le projet (avec justificatif)</h3>
+                <p>Pour les dons supérieurs à 50€, un reçu fiscal nominatif vous sera transmis.</p>
+                <a class="btn" href="mailto:goyeaudsadventure@gmail.com?subject=Don%20-%20Triple%20Couronne%20(avec%20justificatif)">Soutenir le projet (avec justificatif)</a>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div class="logo-card">
+              <img src="logo-triple-couronne.png" alt="Logo Triple Couronne" style="width:78%;height:auto;display:block">
+              <div class="ribbon"></div>
+            </div>
+            <p class="note">Ce projet à pour but de soutenir les actions de l’association “Une Main Pour un Espoir”.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="page">
+        <div class="hr"></div>
+        <p class="muted" style="margin:0">Contact: goyeaudsadventure@gmail.com • +33.7.64.20.69.16</p>
+      </div>
+    </section>
+
+    <!-- ONGLET 2: LE PROJET — déroulé vertical aéré -->
+    <section id="projet" class="section">
+      <div class="page">
+        <h2 class="section-title">Le Projet - La Triple Couronne</h2>
+        <p class="intro">
+          Ambition: inscrire un chrono français parmi les meilleures références mondiales et réaliser la Triple Couronne.
+        </p>
+
+        <!-- Faits clés courts -->
+        <div class="chips">
+          <span class="chip">Manche réalisée en 2025</span>
+          <span class="chip">Cap sur Catalina</span>
+          <span class="chip">Tour de Manhattan (20 Bridges)</span>
+          <span class="chip">Préparation vitesse • froid • endurance</span>
+        </div>
+
+        <!-- Bloc 1: Manche -->
+        <article class="block">
+          <h3>1. La traversée de la Manche - “The English Channel”</h3>
+          <div class="facts">
+            <div class="fact"><span class="dot-g"></span> Douvres → Calais</div>
+            <div class="fact"><span class="dot-y"></span> 34 km (44 km nagé avec courants)</div>
+            <div class="fact"><span class="dot-g"></span> Départ 22 h 40 - nage de nuit</div>
+            <div class="fact"><span class="dot-y"></span> Eau ~18 °C - Temps 10 h 11</div>
+          </div>
+          <p>Considérée comme “l’Everest de la natation”. Au-delà du chrono: gestion des éléments et persévérance. Réalisée en 2025.</p>
+        </article>
+
+        <!-- Bloc 2: Catalina -->
+        <article class="block">
+          <h3>2. La traversée du canal de Catalina - “The Catalina Channel”</h3>
+          <div class="facts">
+            <div class="fact"><span class="dot-g"></span> Île de Santa Catalina → côte de Los Angeles</div>
+            <div class="fact"><span class="dot-y"></span> 32–40 km selon les courants</div>
+            <div class="fact"><span class="dot-g"></span> Temps moyen ~10 h - objectif 8h</div>
+            <div class="fact"><span class="dot-y"></span> Eau 15–20 °C - Réussite ~25–30 %</div>
+          </div>
+          <p>Défi d’endurance: froid relatif, courants, faune marine. Préparation physique et mentale orientée performance.</p>
+        </article>
+
+        <!-- Bloc 3: Manhattan -->
+        <article class="block">
+          <h3>3. Le tour de Manhattan - “20 Bridges Swim”</h3>
+          <div class="facts">
+            <div class="fact"><span class="dot-g"></span> Tour complet de Manhattan (~46 km)</div>
+            <div class="fact"><span class="dot-y"></span> Courants Hudson & East River - ~9 h</div>
+            <div class="fact"><span class="dot-g"></span> Eau 20–22 °C - Kayak de sécurité</div>
+          </div>
+          <p>Qualité de l’eau urbaine à gérer. Épreuve à quota (New York Open Water): logistique et créneaux à anticiper.</p>
+        </article>
+
+        <!-- Engagement + Budget en deux colonnes responsives -->
+        <div class="two-col">
+          <div class="block">
+            <h3>Engagement solidaire</h3>
+            <p>Aux côtés de l’association <b>Une Main Pour un Espoir</b> : sensibiliser et soutenir des actions 100% bénévoles.</p>
+			<p>Je suis aujourd’hui le parrain de leur association.</p>
+			<p>Grâce à cela, je peux partager cette aventure avec ces enfants.</p>
+			<p>Pour leur transmettre des valeurs de persévérance, de travail et de dépassement de soi.</p>
+          </div>
+
+          <div class="block">
+            <h3>Budget prévisionnel (estimation haute)</h3>
+            <ul style="margin:6px 0 0">
+              <li>Inscription Catalina: 5 000 €</li>
+			  <li>Voyage & séjour: 6 000 €</li>
+              <li>Inscription 20 Bridges: 4 000 €</li>
+			  <li>Voyage & séjour: 6 000 €</li>
+              <li>Formalités USA: 500 €</li>
+              <li>Matériel eau froide: 2 500 €</li>
+			  <li>Compétitions eau glacée: 2 000 €</li>
+              <li>Entraînements mer + stage 6 h: 3 500 €</li>
+              <li>Soutien association: 2 000 €</li>
+            </ul>
+            <p style="margin:8px 0 0"><b>Total:</b> 31 500 €</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ONGLET 3: MON PARCOURS — Frise avec accents vert/jaune -->
+    <section id="parcours" class="section">
+      <div class="page">
+        <h2 class="section-title">Mon Parcours - vers l’exigence</h2>
+        <p class="intro">Du club à Metz (sport-études), top 10 FR 400 m 4 nages. Après un accident (2020): rééducation, Finale A, puis eau libre et eau glacée.</p>
+
+        <div class="timeline">
+          <div class="t-item">
+            <div class="t-card">
+              <div class="t-title">Débuts et formation</div>
+              <p class="t-body">Club de Boulay, puis sport-études à Metz. ~20 h natation + 3 h musculation/semaine pendant 8 ans.</p>
+              <span class="tag">Top 10 FR - 400 m 4 nages</span>
+            </div>
+          </div>
+
+          <div class="t-item">
+            <div class="t-card">
+              <div class="t-title">2020 • Accident et résilience</div>
+              <p class="t-body">Rééducation longue. Retour au meilleur chrono et qualification en Finale A (top 8 FR).</p>
+              <span class="tag">Persévérance</span>
+            </div>
+          </div>
+
+          <div class="t-item">
+            <div class="t-card">
+              <div class="t-title">Eau glacée • Performances</div>
+              <p class="t-body">Champion du monde 200 m 4 nages (eau 1,2 °C), record du monde (Guinness). Vice-champion du monde 100 m brasse. Champion de France + records FR 50/100/200 m 4 nages (eau 4,7 °C).</p>
+              <span class="tag">Records & titres</span>
+            </div>
+          </div>
+
+          <div class="t-item">
+            <div class="t-card">
+              <div class="t-title">2025 • Manche: relais puis solo</div>
+              <p class="t-body">Relais ~50 km en 10 h 22, puis solo 44 km en 10 h 11. Base technique et mentale pour Catalina et Manhattan.</p>
+              <span class="tag">Manche réalisée</span>
+            </div>
+          </div>
+
+          <div class="t-item">
+            <div class="t-card">
+              <div class="t-title">Cap Triple Couronne</div>
+              <p class="t-body">Orientation performance en eau libre. Pause Euro 2026 eau glacée pour viser un retour aux Mondiaux 2027 (Roumanie).</p>
+              <span class="tag">Objectif 2027</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div style="max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap">
+      <div style="display:flex;align-items:center;gap:10px">
+        <img src="logo-triple-couronne.png" alt="Logo Triple Couronne" style="width:26px;height:26px">
+        <div>© 2026 Goyeaud’s Adventure - Triple Couronne</div>
+      </div>
+      <div class="muted">Une aventure solidaire et humaine</div>
+    </div>
+  </footer>
+
+  <script>
+    // Gestion d’onglets simple
+    function switchTab(id){
+      document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+      const target = document.getElementById(id);
+      if(target){ target.classList.add('active'); }
+      document.querySelectorAll('.tab-link').forEach(a=>a.classList.remove('active'));
+      const link = document.querySelector('.tab-link[href="#'+id+'"]');
+      if(link){ link.classList.add('active'); }
+      window.scrollTo({top:0, behavior:'instant'});
+    }
+    document.querySelectorAll('.tab-link').forEach(a=>{
+      a.addEventListener('click', e=>{ e.preventDefault(); });
+    });
+    window.addEventListener('DOMContentLoaded', ()=>{
+      const hash = (location.hash||'').replace('#','');
+      if(hash && document.getElementById(hash)) switchTab(hash);
+    });
+  </script>
+</body>
+</html>
